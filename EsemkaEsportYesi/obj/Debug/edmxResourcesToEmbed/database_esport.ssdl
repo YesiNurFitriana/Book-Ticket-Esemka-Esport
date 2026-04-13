@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EsemkaEsportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="player">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nick_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="birthdate" Type="date" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="schedule">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="home_team_id" Type="int" Nullable="false" />
+    <Property Name="away_team_id" Type="int" Nullable="false" />
+    <Property Name="time" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="schedule_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="schedule_id" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="total_ticket" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="team">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="team_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="company_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="team_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="team_id" Type="int" Nullable="false" />
+    <Property Name="player_id" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="birthdate" Type="date" Nullable="false" />
+    <Property Name="gender" Type="bit" Nullable="false" />
+    <Property Name="Role" Type="bit" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__schedule___sched__4AB81AF0">
+    <End Role="schedule" Type="Self.schedule" Multiplicity="1" />
+    <End Role="schedule_detail" Type="Self.schedule_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="schedule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="schedule_detail">
+        <PropertyRef Name="schedule_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__schedule___user___4BAC3F29">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="schedule_detail" Type="Self.schedule_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="schedule_detail">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__schedule__away_t__46E78A0C">
+    <End Role="team" Type="Self.team" Multiplicity="1" />
+    <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="team">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="schedule">
+        <PropertyRef Name="away_team_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__schedule__home_t__45F365D3">
+    <End Role="team" Type="Self.team" Multiplicity="1" />
+    <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="team">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="schedule">
+        <PropertyRef Name="home_team_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__team_deta__playe__4222D4EF">
+    <End Role="player" Type="Self.player" Multiplicity="1" />
+    <End Role="team_detail" Type="Self.team_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="team_detail">
+        <PropertyRef Name="player_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__team_deta__team___412EB0B6">
+    <End Role="team" Type="Self.team" Multiplicity="1" />
+    <End Role="team_detail" Type="Self.team_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="team">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="team_detail">
+        <PropertyRef Name="team_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EsemkaEsportModelStoreContainer">
+    <EntitySet Name="player" EntityType="Self.player" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="schedule" EntityType="Self.schedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="schedule_detail" EntityType="Self.schedule_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="team_detail" EntityType="Self.team_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__schedule___sched__4AB81AF0" Association="Self.FK__schedule___sched__4AB81AF0">
+      <End Role="schedule" EntitySet="schedule" />
+      <End Role="schedule_detail" EntitySet="schedule_detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__schedule___user___4BAC3F29" Association="Self.FK__schedule___user___4BAC3F29">
+      <End Role="user" EntitySet="user" />
+      <End Role="schedule_detail" EntitySet="schedule_detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__schedule__away_t__46E78A0C" Association="Self.FK__schedule__away_t__46E78A0C">
+      <End Role="team" EntitySet="team" />
+      <End Role="schedule" EntitySet="schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK__schedule__home_t__45F365D3" Association="Self.FK__schedule__home_t__45F365D3">
+      <End Role="team" EntitySet="team" />
+      <End Role="schedule" EntitySet="schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK__team_deta__playe__4222D4EF" Association="Self.FK__team_deta__playe__4222D4EF">
+      <End Role="player" EntitySet="player" />
+      <End Role="team_detail" EntitySet="team_detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__team_deta__team___412EB0B6" Association="Self.FK__team_deta__team___412EB0B6">
+      <End Role="team" EntitySet="team" />
+      <End Role="team_detail" EntitySet="team_detail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

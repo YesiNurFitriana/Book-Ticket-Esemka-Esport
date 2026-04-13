@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="42fe52b2f4f24309b57516b42c5e2374" Name="Diagram1">
+        <EntityTypeShape EntityType="EsemkaEsportModel.player" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaEsportModel.schedule" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaEsportModel.schedule_detail" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaEsportModel.team" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaEsportModel.team_detail" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaEsportModel.user" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <AssociationConnector Association="EsemkaEsportModel.FK__team_deta__playe__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaEsportModel.FK__schedule___sched__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaEsportModel.FK__schedule__away_t__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaEsportModel.FK__schedule__home_t__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaEsportModel.FK__schedule___user___4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaEsportModel.FK__team_deta__team___412EB0B6" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
